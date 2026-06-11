@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;600&display=swap');
+
+/* 회원가입 전용 독립 컨테이너 */
+.reg-container {
+  max-width: 1000px;
+  width: 100%;
+  height: 650px;
+  display: flex;
+  background: white;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* --- 왼쪽 이미지 영역 --- */
+.reg-box-left {
+  width: 45%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.reg-brand-overlay {
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.reg-brand-overlay h1 {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 42px;
+  margin: 0 0 15px 0;
+}
+
+.reg-brand-overlay p {
+  font-family: 'IBM Plex Sans KR';
+  font-size: 16px;
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* --- 오른쪽 폼 영역 (완벽한 상하좌우 중앙 정렬) --- */
+.reg-box-right {
+  width: 55%;
+  display: flex;
+  align-items: center;     /* 수직 정렬 기본값 장착 */
+  justify-content: center;    /* 가로 정렬 기본값 장착 */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.reg-form-container {
+  width: 100%;
+  max-width: 380px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 내부 요소 상하 정렬 보장 */
+}
+
+/* 단계 표시 헤더 영역 */
+.reg-step-header {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.reg-step-info {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Plus Jakarta Sans';
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.reg-step-header h3 {
+  font-family: 'IBM Plex Sans KR';
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  color: #333;
+  text-align: left;
+}
+
+.reg-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: #eee;
+  border-radius: 2px;
+}
+
+.reg-progress {
+  height: 100%;
+  background: #3D2C1E; 
+  transition: width 0.3s ease;
+}
+
+/* --- 입력창 그룹 --- */
+.reg-input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ⭐️ 내부 인풋창 상하 균등 정렬 */
+}
+
+.reg-input-group label {
+  display: block;
+  font-family: 'IBM Plex Sans KR';
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+/* 인풋 박스 개별 내부 정렬 */
+.reg-input-wrapper {
+  display: flex;
+  align-items: center; /* ⭐️ 인풋 타이핑 텍스트 수직 중앙 정렬 */
+  height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 15px;
+  background: white;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.reg-input-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: 'IBM Plex Sans KR';
+  font-size: 14px;
+  background: transparent;
+  color: #333;
+}
+
+/* 휴대폰 번호 가로 배치 줄 */
+.reg-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.reg-input-row .reg-input-wrapper {
+  flex: 1; 
+}
+
+/* 인증번호 발송 버튼 */
+.reg-side-btn {
+  white-space: nowrap;
+  height: 48px;
+  padding: 0 15px;
+  background: #4a3a2e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'IBM Plex Sans KR';
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* 하단 메인 버튼 */
+.reg-login-btn {
+  width: 100%;
+  height: 52px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  margin-top: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans KR';
+}
+
+/* 하단 전환용 문구 */
+.reg-sign-in {
+  font-family: 'IBM Plex Sans KR';
+  font-size: 13px;
+  text-align: center; 
+  margin-top: 20px;
+  color: #888;
+  width: 100%;
+}
+
+.reg-sign-in span {
+  color: #333;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ⭐️ 3단계: 완료 화면 정중앙 수직·수평 정렬 기법 추가 */
+.reg-success-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* ⭐️ 가로 정중앙 배치 */
+  justify-content: center;  /* ⭐️ 세로 정중앙 배치 */
+  text-align: center;
+  padding: 30px 0;          /* 균형 잡힌 위아래 여백 */
+  box-sizing: border-box;
+}
+
+.reg-success-icon {
+  font-size: 56px;
+  color: #4a3a2e;
+  margin-bottom: 20px;
+}
+
+.reg-success-view h4 {
+  font-family: 'IBM Plex Sans KR';
+  font-size: 22px;
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.reg-success-view p {
+  font-family: 'IBM Plex Sans KR';
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 하단 풋터 */
+.reg-form-footer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: #ccc;
+  text-align: center;
+}
+/* 🚨 유효성 검사 에러 스타일 추가 */
+
+/* 에러 발생 시 인풋창 테두리를 빨간색으로 변경 */
+.reg-input-wrapper.input-error {
+  border-color: #e53e3e !important;
+  background-color: #fffff5; /* 아주 살짝 붉은 기 도는 투명 배경 (선택) */
+}
+
+/* 아래에 뜰 경고 문구 스타일 */
+.error-text {
+  font-family: 'IBM Plex Sans KR';
+  color: #e53e3e;
+  font-size: 11px;
+  text-align: left;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  padding-left: 4px;
+  display: block;
+}

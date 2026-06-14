@@ -45,22 +45,19 @@ function Register({ changeView }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 💡 백엔드 서버에 데이터 저장 요청
   const handleRegisterSubmit = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, password }), // DB 명세에 맞춘 데이터
+        body: JSON.stringify({ name, phone, password, email }), 
       });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // 💡 alert 없이 성공하면 바로 정중앙 완료 화면(3단계)으로 진입!
         setStep(3);
       } else {
-        // 중복 가입 에러가 나면 비밀번호 확인창 아래에 예쁘게 빨간 글씨로 표시
         setErrors({ serverError: data.message || '가입 중 오류가 발생했습니다.' });
       }
     } catch (error) {
@@ -78,7 +75,7 @@ function Register({ changeView }) {
     } else if (step === 2) {
       if (validateStep2()) {
         setErrors({});
-        handleRegisterSubmit(); // 통과되면 디비 저장하러 가기
+        handleRegisterSubmit(); 
       }
     }
   };

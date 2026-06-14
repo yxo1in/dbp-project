@@ -30,20 +30,18 @@ db.connect((err) => {
 // 📝 [API 1] 회원가입 라우터 (React로부터 데이터를 받아 DB에 저장)
 // ==========================================
 app.post('/api/register', (req, res) => {
-  const { name, phone, password } = req.body; // 리액트에서 보낸 데이터 받아오기
+  const { name, phone, password, email } = req.body; // 리액트에서 보낸 데이터 받아오기
 
   // 간단한 유효성 검사
   if (!name || !phone) {
     return res.status(400).json({ success: false, message: '이름과 전화번호를 모두 입력해주세요.' });
   }
 
-  // 데이터베이스에 회원 정보 삽입 쿼리 (member_id는 자동 증가가 아니라면 일단 현재 날짜 조합이나 로직에 맞춰 처리해야하므로 샘플 ID 생성 혹은 쿼리 가공 필요)
-  // 제공해주신 테이블의 member_id가 AUTO_INCREMENT가 아니기 때문에 임시로 현재 타임스탬프 기반 숫자를 부여하거나 필요시 테이블 수정이 필요할 수 있습니다.
   const tempMemberId = Math.floor(Math.random() * 1000000); 
 
-  const query = 'INSERT INTO member (member_id, name, phone, password) VALUES (?, ?, ?, ?)';
+  const query = 'INSERT INTO member (member_id, name, phone, password, email) VALUES (?, ?, ?, ?, ?)';
   
-  db.query(query, [tempMemberId, name, phone, password], (err, result) => {
+  db.query(query, [tempMemberId, name, phone, password, email], (err, result) => {
     if (err) {
       console.error('회원가입 쿼리 에러:', err);
       // 휴대폰 번호 중복 처리

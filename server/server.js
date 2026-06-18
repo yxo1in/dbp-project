@@ -55,18 +55,14 @@ app.post('/api/register', (req, res) => {
   });
 });
 
-// ==========================================
-// 🔑 [API 2] 로그인 라우터 (전화번호로 회원 조회)
-// ==========================================
 app.post('/api/login', (req, res) => {
-  const { phone } = req.body;
-  const { password } = req.body;
+  const { phone, password } = req.body;
 
   if (!phone || !phone.trim()) {
     return res.status(400).json({ success: false, message: '전화번호를 입력해주세요.' });
   }
 
-  // 탈퇴하지 않은 회원 중 전화번호가 일치하는 회원 조회
+  // 로그인
   const query = 'SELECT * FROM member WHERE phone = ? AND is_deleted = 0 AND password = ?' ;
   
   db.query(query, [phone.trim(), password], (err, results) => {
@@ -75,12 +71,10 @@ app.post('/api/login', (req, res) => {
       return res.status(500).json({ success: false, message: '서버 에러가 발생했습니다.' });
     }
 
-    // 💡 중요: 일치하는 회원이 없을 때 (결과 배열이 비었을 때)
     if (results.length === 0) {
       return res.status(401).json({ success: false, message: '존재하지 않는 회원 정보입니다.' });
     }
 
-    // 💡 회원을 찾았을 때 (로그인 성공)
     return res.status(200).json({ 
       success: true, 
       message: '로그인 성공!', 

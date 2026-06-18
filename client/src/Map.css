@@ -1,0 +1,143 @@
+/* 오른쪽 콘텐츠 감싸는 바구니 */
+.main-content-wrapper {
+  width: 90%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* 실시간 좌석 현황 타이틀 라인 */
+.main-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid #eaddd3;
+  padding-bottom: 20px;
+}
+
+.user-welcome h1 {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 28px;
+  color: #3D2C1E;
+  margin: 0 0 8px 0;
+}
+
+.user-welcome p {
+  color: #a39485;
+  margin: 0;
+  font-size: 15px;
+}
+
+/* 선택가능 / 이용중 / 점검중 원형 도트 상태 표시 */
+.seat-legend {
+  display: flex;
+  gap: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block; /* ⭐️ span 태그 소멸 방지 필수 */
+}
+.dot.empty { background-color: #ffffff; border: 1px solid #ccc; }
+.dot.using { background-color: #4a3a2e; }
+.dot.disabled { background-color: #ebdcd0; }
+
+/* 🤍 흰색 라운드 대형 좌석 판넬 */
+.room-container {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(61, 44, 30, 0.05);
+  border: 1px solid #ebdcd0;
+}
+
+/* S T A G E 바 */
+.screen-bar {
+  width: 100%;
+  height: 40px;
+  background-color: #fdfcfb;
+  border: 1px solid #ebdcd0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a39485;
+  letter-spacing: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 45px;
+}
+
+/* 6열 바둑판 그리드 */
+.seats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+/* 개별 좌석 박스 디자인 (유저님이 띄우신 이쁜 사각형 테두리 유지) */
+.seat-box {
+  height: 85px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #ebdcd0;
+  background-color: #ffffff;
+}
+
+.seat-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(61, 44, 30, 0.08);
+}
+
+/* 🟤 상태별 시그니처 색상 매칭 */
+.seat-box.empty {
+  color: #333;
+}
+.seat-box.empty:hover {
+  border-color: #3D2C1E;
+  color: #3D2C1E;
+  background-color: #fbf9f6;
+}
+
+.seat-box.using {
+  background-color: #4a3a2e; /* 이미지의 진한 초콜릿 브라운 */
+  border-color: #3D2C1E;
+  color: #ffffff;
+}
+
+.seat-box.disabled {
+  background-color: #ebdcd0; /* 아늑한 스킨 베이지 */
+  border-color: #ebdcd0;
+  color: #a39485;
+  cursor: not-allowed;
+}
+
+.seat-box .num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.seat-box .state-text {
+  font-size: 11px;
+  margin-top: 5px;
+  font-weight: 600;
+}

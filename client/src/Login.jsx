@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './App.css'; 
+import './Login.css'; 
 
-function App({ changeView }){
+function Login({ changeView, onLoginSuccess }){
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(''); // 에러 저장용 상태
@@ -13,28 +13,29 @@ function App({ changeView }){
             setLoginError('전화번호를 입력해주세요.');
             return;
         }
+        if (!password) {
+            setLoginError('비밀번호를 입력해주세요.');
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:5000/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone: phone }),
+                body: JSON.stringify({ phone: phone, password: password }),
             });
 
             const data = await response.json();
-
-            // 💡 백엔드에서 success: true를 보내왔고 응답이 정상(200)일 때만 성공 처리
+            
             if (response.ok && data.success) {
                 console.log(`${data.user.name}님 로그인 성공!`, data.user);
+                onLoginSuccess(data.user); 
                 
-                // 로그인 성공 후 메인 화면으로 이동하고 싶다면 아래 주석을 해제하세요.
-                // changeView('home'); 
             } else {
-                // 💡 백엔드가 실패 응답(401 등)을 보냈을 때 메시지를 화면에 세팅!
                 setLoginError(data.message || '로그인에 실패했습니다.');
             }
         } catch (error) {
-            console.log(error); // Unused variable 에러 방지용 log
+            console.log(error); 
             setLoginError('백엔드 서버와 연결할 수 없습니다. (서버가 켜져 있는지 확인하세요)');
         }
     };
@@ -92,4 +93,4 @@ function App({ changeView }){
     );
 }
 
-export default App;
+export default Login;

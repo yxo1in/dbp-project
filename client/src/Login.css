@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap');
+/* Login.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap');
 
 html, body, #root {
   margin: 0;
   width: 100%;
-  height: 100vh; 
+  height: 100vh;
 }
 
 body {
-  background-color: #f8f6f4;
+  background-color: #f5f2ef;
 }
 
-img{
+img {
   border: 0;
 }
 
-/* 실질적인 부모인 #root가 container를 정중앙으로 밀어줍니다 */
 #root {
   display: flex;
   align-items: center;
@@ -23,168 +22,161 @@ img{
 }
 
 .container {
-  max-width: 1000px;
-  max-height: 650px;
-  display: flex;
+  max-width: 960px;
+  max-height: 620px;
   width: 100%;
   height: 100%;
-  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 24px;
   overflow: hidden;
-  background-color: white; /* 확인용 배경색 */
-  
-  /* 내부 글자 dqdq를 가로 가운데로 */
-  text-align: center;display: flex;
-  align-items: center;       /* 왼쪽/오른쪽 상자를 세로 기준 가운데 정렬 */
-  justify-content: space-between; /* ⭐️ 양쪽 끝(왼쪽 끝, 오른쪽 끝)으로 배치! */
-  box-sizing: border-box;    /* 패딩 때문에 상자가 커지는 것 방지 */
-  
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
 }
 
-/* 왼쪽 상자 스타일 */
 .box-left {
   width: 45%;
-  height: 100%; 
-  background-repeat: no-repeat;  
-  background-position: center;   
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
 }
 
-/* 오른쪽 상자 스타일 */
 .box-right {
-  width: 50%;
+  width: 55%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column
+  flex-direction: column;
 }
 
-.icon{
-  max-width: 50px; 
-  max-height: 50px;
+.icon {
+  max-width: 44px;
+  max-height: 44px;
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;  
-  background-position: center;   
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
-
 }
 
-.iconContainer{
-  max-width: 80px;
-  max-height: 60px;
-  width: 100%;
-  height: 100%;
+.iconContainer {
+  width: 64px;
+  height: 56px;
   background-color: #3D2C1E;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 1.15%;
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .input-group {
   display: flex;
-  flex-direction: column;   
-  align-items: flex-start;  
-  max-width: 350px;         
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 320px;
   width: 100%;
-  margin-top: 40px;        
+  margin-top: 32px;
 }
 
-/* 2. 라벨 스타일 */
 .input-group label {
   font-family: 'IBM Plex Sans KR', sans-serif;
-  font-size: 14px;
-  font-weight: 0;
-  color: #333333;
-  margin-bottom: 8px;       
-  padding-left: 4px;         
-}
-
-/* 3. 입력창 스타일 */
-.input-group input {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  width: 100%;             
-  height: 45px;
-  border-radius: 8px;
-  border: 1px solid #cccccc;
-  padding: 0 12px;
-  box-sizing: border-box;  
-  outline: none;           
-}
-
-.login-btn {
-  width: 100%;              
-  height: 48px;             
-  background-color: #000000;
-  color: #FFFFFF;           
-  
-  font-size: 15px;
-  font-weight: 600;         
-  border: none;             
-  border-radius: 8px;        
-  cursor: pointer;           
-  
-  margin-top: 20px;         
-  transition: background-color 0.2s ease;
-}
-
-.login-btn:hover {
-  background-color: #333333;
-}
-
-.login-btn:active {
-  background-color: #555555; 
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b5a4e;
+  margin-bottom: 6px;
+  padding-left: 2px;
 }
 
 .input-wrapper {
   display: flex;
-  align-items: center;        
-  
-  width: 100%;                
-  height: 45px;
-  
-  /* ⭐️ 원래 input에 주었던 테두리와 둥근 모서리를 이 주머니에 줍니다 */
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  background-color: white;
-  
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  border: 0.5px solid #ddd5cc;
+  border-radius: 10px;
+  background-color: #faf8f6;
   padding: 0 12px;
   box-sizing: border-box;
-  
-  /* 클릭(포커스) 되었을 때 부드러운 테두리 변화를 위한 설정 */
-  transition: border-color 0.2s; 
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-/* 💡 2. 입력창 내부의 작은 아이콘 스타일 */
+.input-wrapper:focus-within {
+  border-color: #3D2C1E;
+  background-color: #ffffff;
+}
+
 .input-icon {
-  width: 20px;                /* 아이콘 크기 */
-  height: 20px;
-  margin-right: 8px;          /* 아이콘과 글자 입력창 사이의 간격 */
-  
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  flex-shrink: 0;             /* 화면이 줄어도 아이콘 크기가 찌그러지지 않게 방지 */
+  flex-shrink: 0;
+  opacity: 0.45;
 }
 
 .input-group input {
   border: none;
   background: transparent;
-  outline: none;              
-  
-  width: 100%;                
+  outline: none;
+  width: 100%;
   height: 100%;
-  padding: 0;                 
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
+  color: #1a1410;
+}
+
+.input-group input::placeholder {
+  color: #c4b8b0;
+}
+
+.login-btn {
+  width: 100%;
+  height: 44px;
+  background-color: #3D2C1E;
+  color: #ffffff;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: #231910;
+}
+
+.login-btn:active {
+  background-color: #1a1208;
 }
 
 .sign-in {
   font-family: 'IBM Plex Sans KR', sans-serif;
-  font-size: small;
-  margin-top: 5px;
-  color:#67340b;
+  font-size: 12px;
+  margin-top: 14px;
+  color: #9d8f84;
   cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+
+.sign-in:hover {
+  color: #3D2C1E;
+}
+
+.reg-form-footer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: #c4b8b0;
+  text-align: center;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }

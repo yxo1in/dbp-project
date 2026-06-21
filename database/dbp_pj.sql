@@ -95,7 +95,31 @@ CREATE TABLE `seat` (
   PRIMARY KEY (`seat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+INSERT INTO seat (seat_id, status, member_id) VALUES
+(1, 'EMPTY', NULL),
+(2, 'EMPTY', NULL),
+(3, 'EMPTY', NULL),
+(4, 'EMPTY', NULL),
+(5, 'EMPTY', NULL),
+(6, 'EMPTY', NULL),
+(7, 'EMPTY', NULL),
+(8, 'EMPTY', NULL),
+(9, 'EMPTY', NULL),
+(10, 'EMPTY', NULL),
+(11, 'EMPTY', NULL),
+(12, 'EMPTY', NULL),
+(13, 'EMPTY', NULL),
+(14, 'EMPTY', NULL),
+(15, 'EMPTY', NULL),
+(16, 'EMPTY', NULL),
+(17, 'EMPTY', NULL),
+(18, 'EMPTY', NULL),
+(19, 'EMPTY', NULL),
+(20, 'EMPTY', NULL),
+(21, 'EMPTY', NULL),
+(22, 'EMPTY', NULL),
+(23, 'EMPTY', NULL),
+(24, 'EMPTY', NULL);
 --
 -- Dumping data for table `seat`
 --
@@ -120,7 +144,11 @@ CREATE TABLE `ticket` (
   PRIMARY KEY (`ticket_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+INSERT INTO ticket(price, ticket_name, time) VALUES
+(3000, '2시간권', 120),
+(65000, '50시간권' 3000),
+(120000, '100시간권' 6000),
+(220000, '200시간권', 12000);
 --
 -- Dumping data for table `ticket`
 --

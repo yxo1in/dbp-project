@@ -1,144 +1,153 @@
-/* 1️⃣ 전체 레이아웃 (왼쪽 메뉴 + 오른쪽 콘텐츠 가로 정렬) */
+/* MenuContainer.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap');
+
 .app-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: #f8f6f4; /* 피그마에 있던 은은한 오프화이트/베이지 바탕 */
+  background-color: #f5f2ef;
   overflow: hidden;
 }
 
-/* 2️⃣ 좌측 고정 메뉴 바 (사이드바) */
+/* 사이드바 */
 .sidebar {
-  width: 280px;
+  width: 240px;
   height: 100%;
   background-color: #ffffff;
-  border-right: 1px solid #eaddd3;
+  border-right: 0.5px solid #e8ddd6;
   display: flex;
   flex-direction: column;
-  padding: 40px 24px;
+  padding: 32px 16px;
   box-sizing: border-box;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
-/* 로고 및 상단 타이틀 */
+/* 로고 */
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 50px;
+  gap: 12px;
+  margin-bottom: 36px;
+  padding: 0 8px;
 }
 
 .logo-box {
-  max-width: 50px;
-  max-height: 42px;
-  width: 100%;
-  height: 100%;
-  background-color: #3D2C1E; /* 딥 브라운 */
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  background-color: #3D2C1E;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 20px;
+  flex-shrink: 0;
 }
 
 .sidebar-header h3 {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  color: #3D2C1E;
+  font-size: 15px;
+  color: #1a1410;
   margin: 0;
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 .sidebar-header p {
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 11px;
-  color: #a39485;
-  margin: 3px 0 0 0;
+  color: #b0a298;
+  margin: 2px 0 0 0;
+  font-weight: 400;
 }
 
-/* 메뉴 리스트 스타일 */
+/* 메뉴 리스트 */
 .menu-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
   flex: 1;
 }
 
 .menu-item {
   font-family: 'IBM Plex Sans KR', sans-serif;
   width: 100%;
-  padding: 16px 20px;
+  padding: 10px 12px;
   border: none;
   background-color: transparent;
-  border-radius: 14px;
+  border-radius: 10px;
   text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  color: #7a6b5d;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9d8f84;
   cursor: pointer;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .menu-item:hover {
-  background-color: #fbf9f6;
+  background-color: #f5f2ef;
   color: #3D2C1E;
 }
 
-/* 💡 현재 활성화된 좌석 현황 메뉴 강조 디자인 */
 .menu-item.active {
-  background-color: #fdfcfb;
+  background-color: #f0ece8;
   color: #3D2C1E;
-  font-weight: 700;
-  border-left: 4px solid #3D2C1E; /* 왼쪽에 브라운 포인트 바 */
-  padding-left: 16px;
+  font-weight: 500;
 }
 
-/* 로그아웃 버튼 */
+/* 로그아웃 */
 .logout-btn {
   font-family: 'IBM Plex Sans KR', sans-serif;
   width: 100%;
   background: transparent;
   border: none;
-  color: #a39485;
+  color: #b0a298;
   text-align: left;
-  padding: 14px 20px;
+  padding: 10px 12px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .logout-btn:hover {
-  background-color: #fee2e2;
-  color: #ef4444;
+  background-color: #fdf2f2;
+  color: #c0392b;
 }
 
-/* 3️⃣ 우측 메인 콘텐츠 렌더링 영역 */
+/* 아이콘 */
+.menu-icon {
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.menu-item.active .menu-icon,
+.menu-item:hover .menu-icon {
+  opacity: 1;
+}
+
+/* 메인 콘텐츠 */
 .content-area {
   flex: 1;
   height: 100%;
   overflow-y: auto;
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   justify-content: center;
-  padding: 50px 0;
+  padding: 48px 0;
   box-sizing: border-box;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.menu-icon {
-  width: 20px;   
-  height: 20px;  
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: inline-block;
-  flex-shrink: 0; 
 }

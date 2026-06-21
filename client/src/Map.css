@@ -1,143 +1,210 @@
-/* 오른쪽 콘텐츠 감싸는 바구니 */
+/* Map.css */
 .main-content-wrapper {
   width: 90%;
-  max-width: 1000px;
+  max-width: 900px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
+  animation: fadeIn 0.35s ease;
 }
 
-/* 실시간 좌석 현황 타이틀 라인 */
 .main-content-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 2px solid #eaddd3;
-  padding-bottom: 20px;
+  align-items: center;
 }
 
 .user-welcome h1 {
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  font-size: 28px;
-  color: #3D2C1E;
-  margin: 0 0 8px 0;
+  font-family: 'Plus Jakarta Sans', 'IBM Plex Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1410;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
 }
 
 .user-welcome p {
-  color: #a39485;
+  color: #9d8f84;
   margin: 0;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
-/* 선택가능 / 이용중 / 점검중 원형 도트 상태 표시 */
 .seat-legend {
   display: flex;
-  gap: 20px;
+  gap: 16px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #666;
-  font-weight: 600;
+  gap: 6px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #9d8f84;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  display: inline-block; /* ⭐️ span 태그 소멸 방지 필수 */
+  display: inline-block;
+  flex-shrink: 0;
 }
-.dot.empty { background-color: #ffffff; border: 1px solid #ccc; }
-.dot.using { background-color: #4a3a2e; }
-.dot.disabled { background-color: #ebdcd0; }
+.dot.empty    { background: #d4c4b8; }
+.dot.using    { background: #3D2C1E; }
+.dot.disabled { background: #ede4dc; border: 0.5px solid #d4c4b8; }
 
-/* 🤍 흰색 라운드 대형 좌석 판넬 */
+/* 룸 패널 */
 .room-container {
-  background-color: #ffffff;
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgba(61, 44, 30, 0.05);
-  border: 1px solid #ebdcd0;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  border: 0.5px solid #e8ddd6;
 }
 
-/* S T A G E 바 */
-.screen-bar {
+.room-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.front-desk-bar {
   width: 100%;
-  height: 40px;
-  background-color: #fdfcfb;
-  border: 1px solid #ebdcd0;
+  height: 32px;
+  background: #faf8f6;
+  border: 0.5px solid #e8ddd6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c4b8b0;
+  letter-spacing: 5px;
+  font-size: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zone-label {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 11px;
+  color: #b0a298;
+  font-weight: 400;
+}
+
+.seats-grid {
+  display: grid;
+  gap: 8px;
+}
+.seats-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+.seats-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+.zone-divider {
+  height: 0.5px;
+  background: #f0ece8;
+}
+
+.window-zone {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.window-zone .zone { flex: 1; }
+
+.window-divider {
+  width: 0.5px;
+  background: #f0ece8;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* 좌석 */
+.seat-box {
+  height: 68px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a39485;
-  letter-spacing: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 45px;
-}
-
-/* 6열 바둑판 그리드 */
-.seats-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-}
-
-/* 개별 좌석 박스 디자인 (유저님이 띄우신 이쁜 사각형 테두리 유지) */
-.seat-box {
-  height: 85px;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid #ebdcd0;
-  background-color: #ffffff;
+  border: 0.5px solid #e8ddd6;
+  background: #faf8f6;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.seat-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(61, 44, 30, 0.08);
-}
-
-/* 🟤 상태별 시그니처 색상 매칭 */
-.seat-box.empty {
-  color: #333;
-}
 .seat-box.empty:hover {
   border-color: #3D2C1E;
-  color: #3D2C1E;
-  background-color: #fbf9f6;
+  background: #f0ece8;
 }
 
 .seat-box.using {
-  background-color: #4a3a2e; /* 이미지의 진한 초콜릿 브라운 */
+  background: #3D2C1E;
   border-color: #3D2C1E;
-  color: #ffffff;
+  cursor: default;
 }
 
 .seat-box.disabled {
-  background-color: #ebdcd0; /* 아늑한 스킨 베이지 */
-  border-color: #ebdcd0;
-  color: #a39485;
+  background: #f5f2ef;
+  border-color: #ede4dc;
   cursor: not-allowed;
 }
 
 .seat-box .num {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.seat-box .state-text {
-  font-size: 11px;
-  margin-top: 5px;
-  font-weight: 600;
+.seat-box.empty .num    { color: #6b5a4e; }
+.seat-box.using .num    { color: #ffffff; }
+.seat-box.disabled .num { color: #c4b8b0; }
+
+/* 요약 바 */
+.room-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid #e8ddd6;
+}
+
+.summary-stat {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  color: #9d8f84;
+}
+
+.summary-stat strong {
+  color: #1a1410;
+  font-weight: 500;
+}
+
+.summary-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #d4c4b8;
+  flex-shrink: 0;
+}
+
+.map-loading {
+  margin-top: 120px;
+  text-align: center;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  color: #9d8f84;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

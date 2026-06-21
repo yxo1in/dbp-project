@@ -1,268 +1,266 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;600&display=swap');
+/* Register.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap');
 
-/* 회원가입 전용 독립 컨테이너 */
 .reg-container {
-  max-width: 1000px;
+  max-width: 960px;
   width: 100%;
-  height: 650px;
+  height: 620px;
   display: flex;
-  background: white;
-  border-radius: 32px;
+  background: #ffffff;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
-/* --- 왼쪽 이미지 영역 --- */
+/* 왼쪽 이미지 */
 .reg-box-left {
   width: 45%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  position: relative;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
-.reg-brand-overlay {
-  padding: 40px;
-  background: rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.reg-brand-overlay h1 {
-  font-family: 'Plus Jakarta Sans';
-  font-size: 42px;
-  margin: 0 0 15px 0;
-}
-
-.reg-brand-overlay p {
-  font-family: 'IBM Plex Sans KR';
-  font-size: 16px;
-  opacity: 0.9;
-  line-height: 1.6;
-  margin: 0;
-  word-break: keep-all;
-}
-
-/* --- 오른쪽 폼 영역 (완벽한 상하좌우 중앙 정렬) --- */
+/* 오른쪽 폼 */
 .reg-box-right {
   width: 55%;
   display: flex;
-  align-items: center;     /* 수직 정렬 기본값 장착 */
-  justify-content: center;    /* 가로 정렬 기본값 장착 */
-  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 48px;
   box-sizing: border-box;
 }
 
 .reg-form-container {
   width: 100%;
-  max-width: 380px; 
+  max-width: 340px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 내부 요소 상하 정렬 보장 */
 }
 
-/* 단계 표시 헤더 영역 */
+/* 단계 헤더 */
 .reg-step-header {
-  margin-bottom: 30px;
-  width: 100%;
+  margin-bottom: 24px;
 }
 
 .reg-step-info {
   display: flex;
   justify-content: space-between;
-  font-family: 'Plus Jakarta Sans';
-  font-size: 12px;
-  color: #999;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #b0a298;
   margin-bottom: 8px;
-  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .reg-step-header h3 {
-  font-family: 'IBM Plex Sans KR';
-  margin: 0 0 12px 0;
-  font-size: 24px;
-  color: #333;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1410;
   text-align: left;
 }
 
 .reg-progress-bar {
   width: 100%;
   height: 2px;
-  background: #eee;
+  background: #ede4dc;
   border-radius: 2px;
 }
 
 .reg-progress {
   height: 100%;
-  background: #3D2C1E; 
+  background: #3D2C1E;
+  border-radius: 2px;
   transition: width 0.3s ease;
 }
 
-/* --- 입력창 그룹 --- */
+/* 입력 그룹 */
 .reg-input-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* ⭐️ 내부 인풋창 상하 균등 정렬 */
 }
 
 .reg-input-group label {
   display: block;
-  font-family: 'IBM Plex Sans KR';
+  font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 13px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
+  font-weight: 500;
+  color: #6b5a4e;
+  margin-bottom: 6px;
   text-align: left;
 }
 
-/* 인풋 박스 개별 내부 정렬 */
 .reg-input-wrapper {
   display: flex;
-  align-items: center; /* ⭐️ 인풋 타이핑 텍스트 수직 중앙 정렬 */
-  height: 48px;
-  border: 1px solid #ddd;
+  align-items: center;
+  height: 44px;
+  border: 0.5px solid #ddd5cc;
   border-radius: 10px;
-  padding: 0 15px;
-  background: white;
+  padding: 0 12px;
+  background: #faf8f6;
   box-sizing: border-box;
   width: 100%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.reg-input-wrapper:focus-within {
+  border-color: #3D2C1E;
+  background-color: #ffffff;
+}
+
+.reg-input-wrapper.input-error {
+  border-color: #c0392b;
+  background-color: #fff8f8;
 }
 
 .reg-input-wrapper input {
   border: none;
   outline: none;
   width: 100%;
-  font-family: 'IBM Plex Sans KR';
+  font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 14px;
   background: transparent;
-  color: #333;
+  color: #1a1410;
 }
 
-/* 휴대폰 번호 가로 배치 줄 */
+.reg-input-wrapper input::placeholder {
+  color: #c4b8b0;
+}
+
+/* 휴대폰 번호 행 */
 .reg-input-row {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   width: 100%;
 }
 
 .reg-input-row .reg-input-wrapper {
-  flex: 1; 
+  flex: 1;
 }
 
 /* 인증번호 발송 버튼 */
 .reg-side-btn {
   white-space: nowrap;
-  height: 48px;
-  padding: 0 15px;
-  background: #4a3a2e;
-  color: white;
+  height: 44px;
+  padding: 0 14px;
+  background: #3D2C1E;
+  color: #ffffff;
   border: none;
   border-radius: 10px;
-  font-family: 'IBM Plex Sans KR';
-  font-size: 13px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* 하단 메인 버튼 */
+.reg-side-btn:hover {
+  background: #231910;
+}
+
+/* 메인 버튼 */
 .reg-login-btn {
   width: 100%;
-  height: 52px;
-  background: #1a1a1a;
-  color: white;
+  height: 44px;
+  background: #3D2C1E;
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
-  margin-top: 25px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  font-family: 'IBM Plex Sans KR';
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  transition: background-color 0.2s ease;
 }
 
-/* 하단 전환용 문구 */
+.reg-login-btn:hover {
+  background: #231910;
+}
+
+/* 하단 전환 문구 */
 .reg-sign-in {
-  font-family: 'IBM Plex Sans KR';
-  font-size: 13px;
-  text-align: center; 
-  margin-top: 20px;
-  color: #888;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 16px;
+  color: #9d8f84;
   width: 100%;
 }
 
 .reg-sign-in span {
-  color: #333;
-  text-decoration: underline;
+  color: #3D2C1E;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-/* ⭐️ 3단계: 완료 화면 정중앙 수직·수평 정렬 기법 추가 */
-.reg-success-view {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;      /* ⭐️ 가로 정중앙 배치 */
-  justify-content: center;  /* ⭐️ 세로 정중앙 배치 */
-  text-align: center;
-  padding: 30px 0;          /* 균형 잡힌 위아래 여백 */
-  box-sizing: border-box;
+.reg-sign-in span:hover {
+  text-decoration: underline;
 }
 
-.reg-success-icon {
-  font-size: 56px;
-  color: #4a3a2e;
-  margin-bottom: 20px;
-}
-
-.reg-success-view h4 {
-  font-family: 'IBM Plex Sans KR';
-  font-size: 22px;
-  margin: 0 0 12px 0;
-  color: #333;
-}
-
-.reg-success-view p {
-  font-family: 'IBM Plex Sans KR';
-  font-size: 14px;
-  color: #777;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* 하단 풋터 */
-.reg-form-footer {
-  margin-top: 40px;
-  font-size: 11px;
-  color: #ccc;
-  text-align: center;
-}
-/* 🚨 유효성 검사 에러 스타일 추가 */
-
-/* 에러 발생 시 인풋창 테두리를 빨간색으로 변경 */
-.reg-input-wrapper.input-error {
-  border-color: #e53e3e !important;
-  background-color: #fffff5; /* 아주 살짝 붉은 기 도는 투명 배경 (선택) */
-}
-
-/* 아래에 뜰 경고 문구 스타일 */
+/* 에러 텍스트 */
 .error-text {
-  font-family: 'IBM Plex Sans KR';
-  color: #e53e3e;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  color: #c0392b;
   font-size: 11px;
   text-align: left;
   margin-top: 4px;
   margin-bottom: 2px;
-  padding-left: 4px;
+  padding-left: 2px;
   display: block;
+}
+
+/* 완료 화면 */
+.reg-success-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.reg-success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #edf7ed;
+  border: 0.5px solid #b8debb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #3a7d44;
+}
+
+.reg-success-view h4 {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1410;
+}
+
+.reg-success-view p {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  color: #9d8f84;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 푸터 */
+.reg-form-footer {
+  margin-top: 32px;
+  font-size: 11px;
+  color: #c4b8b0;
+  text-align: center;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }

@@ -14,10 +14,23 @@ export default function Profile({ user, setUser }) {
   const [email, setEmail] = useState(user?.email || '');
   const [tempVal, setTempVal] = useState('');
 
+  // 📊 총 이용 시간 실시간 연동을 위한 로컬 상태
+  const [totalMinutes, setTotalMinutes] = useState(0);
+
   useEffect(() => {
     if (user) {
       setPhone(user.phone || '');
       setEmail(user.email || '');
+
+      // 💡 [실시간 연동] 백엔드에 구현된 총 이용 시간 API 호출
+      fetch(`http://localhost:5000/api/member/${user.memberId}/usage`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.totalUsedMinutes !== undefined) {
+            setTotalMinutes(data.totalUsedMinutes);
+          }
+        })
+        .catch(err => console.error("총 이용 시간 로드 실패:", err));
     }
   }, [user]);
 
@@ -31,8 +44,7 @@ export default function Profile({ user, setUser }) {
   // 이름 첫 글자 (아바타 기본)
   const initial = (user?.name || '?')[0];
 
-  // 총 이용 시간 (분 → 시간/분)
-  const totalMinutes = user?.totalUsedTime ?? 0;
+  // 총 이용 시간 (분 → 시간/분) - 백엔드 실시간 데이터 적용
   const totalHours = Math.floor(totalMinutes / 60);
   const totalMins = totalMinutes % 60;
 
@@ -54,16 +66,13 @@ export default function Profile({ user, setUser }) {
   };
 
   const saveEdit = async (field) => {
-    // 💡 [추가] 정보 저장 전 한 번 더 물어보는 확인창
     const fieldName = field === 'phone' ? '전화번호' : '이메일';
     if (!window.confirm(`입력하신 ${fieldName}로 변경하시겠습니까?`)) {
       return;
     }
 
     try {
-      const body = field === 'phone'
-        ? { phone: tempVal }
-        : { email: tempVal };
+      const body = field === 'phone' ? { phone: tempVal } : { email: tempVal };
 
       const res = await fetch(`http://localhost:5000/api/member/${user.memberId}`, {
         method: 'PATCH',
@@ -76,7 +85,6 @@ export default function Profile({ user, setUser }) {
         if (field === 'phone') setPhone(tempVal);
         else setEmail(tempVal);
         
-        // ⭐ [핵심 추가] 부모 컴포넌트의 유저 상태를 변경하여 localStorage에도 새 정보가 영구 저장되도록 연동합니다.
         if (setUser) {
           setUser(prev => ({
             ...prev,
@@ -102,7 +110,6 @@ export default function Profile({ user, setUser }) {
     if (newPw.length < 8) { setPwMessage({ type: 'error', text: '비밀번호는 8자 이상이어야 합니다.' }); return; }
     if (newPw !== confirmPw) { setPwMessage({ type: 'error', text: '새 비밀번호가 일치하지 않습니다.' }); return; }
 
-    // 💡 [추가] 비밀번호 변경 적용 전 한 번 더 물어보기
     if (!window.confirm("비밀번호를 변경하시겠습니까?")) {
       return;
     }
@@ -119,7 +126,6 @@ export default function Profile({ user, setUser }) {
         setPwMessage({ type: 'success', text: '비밀번호가 변경되었습니다.' });
         setCurrentPw(''); setNewPw(''); setConfirmPw('');
         
-        // 부모 컴포넌트의 비밀번호 정보도 최신화 (필요한 경우)
         if (setUser) {
           setUser(prev => ({ ...prev, password: newPw }));
         }
@@ -133,6 +139,47 @@ export default function Profile({ user, setUser }) {
     }
   };
 
+  const handleWithdrawal = async () => {
+    if (!window.confirm("정말 Study Space 서비스를 탈퇴하시겠습니까?\n구매하신 이용권 정보와 과거 이용 이력이 모두 삭제됩니다.")) {
+      return;
+    }
+    if (!window.confirm("진짜로 탈퇴 처리를 진행할까요? 이 작업은 되돌릴 수 없으며 즉시 로그아웃됩니다.")) {
+      return;
+    }
+
+    const targetId = user?.memberId || user?.id;
+    if (!targetId) {
+      alert("회원 정보를 식별할 수 없습니다.");
+      return;
+    }
+
+    try {
+      if (user?.currentSeat) {
+        await fetch('http://localhost:5000/api/seats/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ seat_id: user.currentSeat, member_id: targetId }),
+        }).catch(err => console.log("사전 퇴실 불필요 또는 이미 퇴실됨"));
+      }
+
+      const res = await fetch(`http://localhost:5000/api/member/${targetId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        alert("회원 탈퇴가 정상적으로 처리되었습니다. 그동안 이용해 주셔서 감사합니다.");
+        
+        localStorage.removeItem('study_space_user');
+        window.location.reload(); 
+      } else {
+        alert(data.message || "탈퇴 처리 중 오류가 발생했습니다.");
+      }
+    } catch {
+      alert("서버 통신 중 오류가 발생했습니다. 백엔드 서버가 켜져 있는지 확인해 주세요.");
+    }
+  };
+
   return (
     <div className="profile-wrapper">
       <header className="profile-header">
@@ -143,10 +190,7 @@ export default function Profile({ user, setUser }) {
       {/* 아바타 + 이름 */}
       <div className="profile-card profile-avatar-section">
         <div className="avatar-circle" onClick={() => fileInputRef.current?.click()}>
-          {avatarSrc
-            ? <img src={avatarSrc} alt="프로필" />
-            : initial
-          }
+          {avatarSrc ? <img src={avatarSrc} alt="프로필" /> : initial}
           <div className="avatar-overlay"><span>변경</span></div>
         </div>
         <input
@@ -174,7 +218,15 @@ export default function Profile({ user, setUser }) {
         <div className="stat-item">
           <span className="stat-label">남은 시간</span>
           <span className="stat-value">
-            {Math.floor((user?.remainingTime ?? 0) / 60)}<span className="stat-unit">시간</span>
+            {Math.floor((user?.remainingTime ?? 0) / 60)}
+            <span className="stat-unit">시간</span>
+            {(user?.remainingTime ?? 0) % 60 > 0 && (
+              <>
+                {' '}
+                {(user?.remainingTime ?? 0) % 60}
+                <span className="stat-unit">분</span>
+              </>
+            )}
           </span>
         </div>
       </div>
@@ -296,6 +348,27 @@ export default function Profile({ user, setUser }) {
           </div>
         )}
       </div>
+
+      {/* 🚨 [추가] 회원 탈퇴 버튼 영역 (마우스 올리면 빨간색 변신) */}
+      <div className="withdrawal-section" style={{ marginTop: '32px', textAlign: 'right', padding: '0 8px' }}>
+        <button 
+          onClick={handleWithdrawal}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#a0a0a0',
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            fontSize: '13px',
+            transition: 'color 0.2s ease'
+          }}
+          onMouseOver={(e) => e.target.style.color = '#ff4d4d'} // 마우스 올리면 빨간색
+          onMouseOut={(e) => e.target.style.color = '#a0a0a0'}  // 마우스 때면 원상복구
+        >
+          탈퇴하기
+        </button>
+      </div>
+
     </div>
   );
 }

@@ -405,14 +405,12 @@ app.post('/api/tickets/buy', (req, res) => {
 app.get('/api/member/:id/usage', (req, res) => {
   const memberId = req.params.id;
 
-  // 💡 핵심 SQL: 
-  // 1. 이미 퇴실 완료된 로그들의 총 합산 시간(과거 이용 시간)
-  // 2. 만약 현재 입실 중(check_out_at IS NULL)이라면, '입실 시각부터 지금까지 흘러간 시간'을 구해서 더해줍니다.
+  // check_in_at과 check_out_at이 모두 완벽히 존재하는 정상 로그만 더하도록 쿼리 수정
   const query = `
     SELECT 
       (SELECT IFNULL(SUM(TIMESTAMPDIFF(MINUTE, check_in_at, check_out_at)), 0) 
        FROM usage_log 
-       WHERE member_id = ? AND check_out_at IS NOT NULL) AS pastUsedMinutes,
+       WHERE member_id = ? AND check_out_at IS NOT NULL AND check_in_at IS NOT NULL) AS pastUsedMinutes,
        
       (SELECT IFNULL(TIMESTAMPDIFF(MINUTE, check_in_at, NOW()), 0) 
        FROM usage_log 
@@ -429,12 +427,39 @@ app.get('/api/member/:id/usage', (req, res) => {
     const pastMinutes = results[0].pastUsedMinutes || 0;
     const currentMinutes = results[0].currentUsedMinutes || 0;
 
-    // ⭐ 최종 보여줄 시간 = [과거에 쓴 시간] + [지금 자리에 앉아서 흐른 시간]
-    const totalUsedMinutes = pastMinutes + currentMinutes;
+    // 혹시라도 마이너스나 비정상적인 데이터가 오면 0으로 필터링
+    const totalUsedMinutes = Math.max(0, pastMinutes) + Math.max(0, currentMinutes);
 
-    console.log(`📊 [이용시간조회] 회원: ${memberId} -> 과거: ${pastMinutes}분 + 현재 진행 중: ${currentMinutes}분 = 총 ${totalUsedMinutes}분`);
+    console.log(`📊 [이용시간조회] 회원: ${memberId} -> 과거: ${pastMinutes}분 + 현재: ${currentMinutes}분 = 총 ${totalUsedMinutes}분`);
 
     return res.status(200).json({ totalUsedMinutes: totalUsedMinutes });
+  });
+});
+// ─────────────────────────────────────────
+// [추가] 회원 탈퇴 API (CASCADE 연동 버전)
+// ─────────────────────────────────────────
+app.delete('/api/member/:id', (req, res) => {
+  const memberId = req.params.id;
+
+  console.log(`🚨 [탈퇴요청] 회원 ID ${memberId}의 계정 삭제를 시작합니다.`);
+
+  // DB 외래키(CASCADE) 덕분에 member 테이블만 지우면 
+  // usage_log, member_ticket 등의 흔적은 MySQL이 알아서 한 방에 지워줍니다!
+  const query = 'DELETE FROM member WHERE member_id = ?';
+
+  db.query(query, [memberId], (err, result) => {
+    if (err) {
+      console.error('❌ 회원 탈퇴 쿼리 에러:', err.message);
+      return res.status(500).json({ success: false, message: '서버 오류로 인해 탈퇴 처리에 실패했습니다.' });
+    }
+
+    // 영향을 받은 행(Row)이 0개라면 애초에 존재하지 않는 회원 ID인 경우입니다.
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ success: false, message: '존재하지 않는 회원 정보입니다.' });
+    }
+
+    console.log(`🧹 [탈퇴완료] 회원 ID ${memberId} 삭제 및 관련 자식 데이터 CASCADE 폭파 완료!`);
+    return res.status(200).json({ success: true, message: '회원 탈퇴가 완료되었습니다.' });
   });
 });
 

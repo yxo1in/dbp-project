@@ -6,6 +6,7 @@
   import Map from './Map.jsx'
   import Home from './Home.jsx'
   import MenuContainer from './MenuContainer.jsx'
+  import Profile from './Profile.jsx'
 
   export default function MainContainer() {
     const [view, setView] = useState('login');
@@ -26,6 +27,8 @@
           return <Home user={user} changeView={setView} />;
         case 'map':
           return <Map user={user}/>
+        case 'profile':
+          return <Profile user={user}/>
         default:
           return <Login changeView={setView} onLoginSuccess={handleLoginSuccess} />;
       }

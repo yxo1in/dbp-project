@@ -208,3 +208,117 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* ──────────────────────────────────────────────────────────
+   🟢 내 자리 초록색 점 오른쪽 구석 절대 좌표 배치
+   ────────────────────────────────────────────────────────── */
+
+/* 좌석 박스 자체를 기준점(relative)으로 설정 */
+.seat-box {
+  position: relative; /* 구석 배치를 위한 기준점 설정 */
+  height: 68px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 0.5px solid #e8ddd6;
+  background: #faf8f6;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+/* 내 좌석일 때 고유 테두리 부각 */
+.seat-box.my-seat {
+  border: 1.5px solid #2ecc71 !important;
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
+}
+
+/* 숫자는 무조건 정중앙 고정 */
+.seat-box .num {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 초록 점을 오른쪽 위 구석으로 강제 고정 */
+.my-seat-indicator {
+  position: absolute;
+  top: 8px;      /* 위쪽 구석에서 8px 떨어짐 */
+  right: 8px;    /* 오른쪽 구석에서 8px 떨어짐 */
+  width: 6px;
+  height: 6px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #2ecc71, 0 0 15px #2ecc71;
+  animation: pulse-green 2s infinite ease-in-out;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 5px rgba(46, 204, 113, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+  }
+}
+
+.room-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양끝 정렬 핵심 */
+  padding: 10px 20px; /* 버튼 높이 매칭을 위해 상하 패딩 살짝 조절 */
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid #e8ddd6;
+}
+
+.summary-stats-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 퇴실 버튼 공통 디자인 기초 정의 */
+.checkout-action-btn {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* ⚪ 좌석 선택 안 했을 때: 비활성화 상태 (차분한 연회색베이지 크림톤) */
+.checkout-action-btn.disabled {
+  background: #f5f0ec;
+  color: #c4b8b0;
+  cursor: not-allowed;
+}
+
+/* 🔴 좌석 선택해서 이용 중일 때: 활성화 상태 (고급스러운 소프트 레드) */
+.checkout-action-btn.active {
+  background: #e74c3c;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+}
+
+/* 활성화 상태에서 마우스를 올렸을 때 호버 앤 클릭 피드백 효과 */
+.checkout-action-btn.active:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.checkout-action-btn.active:active {
+  transform: translateY(0);
+}

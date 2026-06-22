@@ -1,0 +1,372 @@
+/* Profile.css */
+.profile-wrapper {
+  width: 90%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.35s ease;
+}
+
+.profile-header {
+  margin-bottom: 8px;
+}
+
+.profile-header h1 {
+  font-family: 'Plus Jakarta Sans', 'IBM Plex Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1410;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
+}
+
+.profile-header p {
+  font-size: 14px;
+  color: #9d8f84;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* 카드 공통 */
+.profile-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 0.5px solid #e8ddd6;
+}
+
+/* 아바타 섹션 */
+.profile-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f0ece8;
+  border: 0.5px solid #e8ddd6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #6b5a4e;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.avatar-circle:hover {
+  border-color: #3D2C1E;
+}
+
+.avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(61, 44, 30, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.avatar-circle:hover .avatar-overlay {
+  background: rgba(61, 44, 30, 0.25);
+}
+
+.avatar-overlay span {
+  font-size: 11px;
+  color: #ffffff;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.avatar-circle:hover .avatar-overlay span {
+  opacity: 1;
+}
+
+.avatar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.avatar-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #1a1410;
+  letter-spacing: -0.3px;
+}
+
+.avatar-sub {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #b0a298;
+  font-weight: 400;
+}
+
+.avatar-upload-input {
+  display: none;
+}
+
+/* 이용 통계 */
+.profile-stats {
+  display: flex;
+  gap: 0;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px;
+  border-right: 0.5px solid #f0ece8;
+}
+
+.stat-item:first-child { padding-left: 0; }
+.stat-item:last-child  { border-right: none; }
+
+.stat-label {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #b0a298;
+  font-weight: 400;
+}
+
+.stat-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #1a1410;
+  letter-spacing: -0.5px;
+}
+
+.stat-unit {
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b5a4e;
+  letter-spacing: 0;
+}
+
+/* 섹션 제목 */
+.card-section-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #b0a298;
+  font-weight: 400;
+  margin: 0 0 16px 0;
+}
+
+/* 정보 행 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 0.5px solid #f5f2ef;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-row:first-of-type {
+  padding-top: 0;
+}
+
+.info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #b0a298;
+  font-weight: 400;
+}
+
+.info-value {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 14px;
+  color: #1a1410;
+  font-weight: 400;
+}
+
+.info-value.placeholder {
+  color: #c4b8b0;
+}
+
+/* 편집 버튼 */
+.edit-btn {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #9d8f84;
+  background: none;
+  border: 0.5px solid #e8ddd6;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.edit-btn:hover {
+  color: #3D2C1E;
+  border-color: #3D2C1E;
+}
+
+/* 인라인 편집 폼 */
+.edit-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+  margin-left: 16px;
+}
+
+.edit-input {
+  flex: 1;
+  height: 34px;
+  border: 0.5px solid #ddd5cc;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  color: #1a1410;
+  background: #faf8f6;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.edit-input:focus {
+  border-color: #3D2C1E;
+  background: #ffffff;
+}
+
+.save-btn {
+  height: 34px;
+  padding: 0 12px;
+  background: #3D2C1E;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.save-btn:hover { background: #231910; }
+
+.cancel-btn {
+  height: 34px;
+  padding: 0 10px;
+  background: none;
+  color: #9d8f84;
+  border: 0.5px solid #e8ddd6;
+  border-radius: 8px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.cancel-btn:hover { color: #1a1410; }
+
+/* 비밀번호 카드 */
+.password-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.password-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.password-input-group label {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 12px;
+  color: #b0a298;
+}
+
+.password-confirm-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.password-confirm-row .edit-input { flex: 1; }
+
+.pw-error {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 11px;
+  color: #c0392b;
+  padding-left: 2px;
+}
+
+.pw-success {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 11px;
+  color: #3a7d44;
+  padding-left: 2px;
+}
+
+/* 비밀번호 변경 토글 버튼 */
+.pw-toggle-btn {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  color: #6b5a4e;
+  background: #faf8f6;
+  border: 0.5px solid #e8ddd6;
+  border-radius: 10px;
+  padding: 11px 16px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pw-toggle-btn:hover {
+  border-color: #3D2C1E;
+  background: #f0ece8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

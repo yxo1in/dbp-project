@@ -38,6 +38,7 @@ CREATE TABLE `member` (
   `email` varchar(45) NOT NULL,
   `is_deleted` tinyint NOT NULL DEFAULT '0',
   `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `total_used_time` int DEFAULT 0;
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `phone_UNIQUE` (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
